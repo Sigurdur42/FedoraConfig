@@ -1,0 +1,1 @@
+rsync -aPz --delete --info=progress2  /home/mwagner/gdrive/Takeout/ /home/mwagner/Takeout/

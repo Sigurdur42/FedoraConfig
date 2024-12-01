@@ -1,0 +1,1 @@
+rclone sync -v  gphoto:album/Wallpaper ~/.wallpaper/
