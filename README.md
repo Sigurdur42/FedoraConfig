@@ -3,7 +3,7 @@ Newer version of my linux configuration
 
 # Local Configuration
 ## Folder structure in home
-'' 
+````
 ~
 |- dev
 |-- FedoraConfig
@@ -11,7 +11,7 @@ Newer version of my linux configuration
 |- gdrive
 |- Nextcloud
 |- Takeout
-''
+````
 
 Semantische Zuordnung
 | Ordner      | Beschreibung |
