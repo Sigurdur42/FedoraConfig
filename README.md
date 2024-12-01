@@ -31,3 +31,4 @@ Nehme dabei die gespeicherten Secret Daten, sonst funktioniert das nicht.
 | Skript      | Beschreibung |
 | ----------- | ----------- |
 |[getGoogleTakeout.sh](getGoogleTakeout.sh) | Nutzt rsync um den Ordner Takeout auf den lokalen Takout Ordner zu spiegeln.|
+|[getWallpaperAlbum.sh](getWallpaperAlbum.sh) | Nutzt rsync um das Album Wallpaper auf die lokale Platte zu spiegeln.|
