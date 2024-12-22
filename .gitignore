@@ -1,0 +1,5 @@
+#VSCode stuff..
+.vscode/
+
+# ansible temp data
+*-artifact-*.json
