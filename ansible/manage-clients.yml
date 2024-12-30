@@ -3,13 +3,17 @@
   hosts: clients
 
   tasks:
-  - name: Ensure my user exists
-    ansible.builtin.user:
-      name: mwagner
-      generate_ssh_key: false
-      state: present
-      update_password: on_create
-      groups: "wheel"
-      password: $6$WtIUKXlU89ThPBvN$t5MIljRtyYoxAqoFixPPum3oOrA/zm.G0djMA10yKTPXAu8y.AlJAak3ppqV1W1M16Ppb6ziajQh2UQFtU5wV/
-    become: yes
-    become_method: sudo
+    - name: Ensure my user exists
+      ansible.builtin.user:
+        name: mwagner
+        generate_ssh_key: false
+        state: present
+        update_password: on_create
+        groups: "wheel"
+        password: $6$WtIUKXlU89ThPBvN$t5MIljRtyYoxAqoFixPPum3oOrA/zm.G0djMA10yKTPXAu8y.AlJAak3ppqV1W1M16Ppb6ziajQh2UQFtU5wV/
+      become: yes
+      become_method: sudo
+
+    - name: Import Fedora Tasks
+      include_tasks: playbooks/fedora-tasks.yml
+      when: ansible_pkg_mgr is match("dnf.*")

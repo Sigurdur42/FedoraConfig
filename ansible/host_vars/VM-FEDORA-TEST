@@ -1,0 +1,8 @@
+---
+# TOOD: use ansible user
+ansible_user: mwagner
+
+# TODO: Use vault
+ansible_password: Xantur009
+ansible_sudo_pass: Xantur009
+...
