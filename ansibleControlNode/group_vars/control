@@ -6,6 +6,7 @@ packages_to_install:
     - qemu-guest-agent
     - openssh-server
     - ansible
+    - sshpass
 
 repo_base_path: /home/ansible/ansible
 

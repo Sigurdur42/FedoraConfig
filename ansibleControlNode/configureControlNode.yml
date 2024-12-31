@@ -17,6 +17,14 @@
       become: yes
       become_method: sudo
 
+    - name: Ensure the qemu guest agent is running
+      ansible.builtin.service:
+        name: qemu-guest-agent
+        state: started
+        enabled: true
+      become: yes
+      become_method: sudo
+
     - name: Clone the control node git repo
       ansible.builtin.git:
         clone: yes
