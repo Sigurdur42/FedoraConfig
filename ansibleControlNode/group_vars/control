@@ -1,0 +1,9 @@
+---
+packages_to_install: 
+    - git
+    - python3
+    - pipx
+    - qemu-guest-agent
+
+
+...

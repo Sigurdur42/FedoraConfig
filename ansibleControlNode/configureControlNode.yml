@@ -1,0 +1,26 @@
+---
+- name: Setup of the ansible control node
+  hosts: control
+
+  tasks:
+    - name: run apt-update
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
+      become: yes
+      become_method: sudo
+
+    - name: install apt packages
+      ansible.builtin.apt:
+        name: "{{ packages_to_install }}"
+        state: latest
+      become: yes
+      become_method: sudo
+
+    - name: install ansible itself
+      community.general.pipx:
+        name: ansible
+        state: latest
+        global: yes
+        install_deps: yes
+        pip_args: '--include-deps'
