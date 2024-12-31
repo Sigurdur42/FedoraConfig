@@ -4,6 +4,9 @@ packages_to_install:
     - python3
     - pipx
     - qemu-guest-agent
+    - openssh-server
+    - ansible
 
+repo_base_path: /home/ansible/ansible
 
 ...

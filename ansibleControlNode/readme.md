@@ -9,6 +9,8 @@ password: ansiblePassword
 ```
 
 ## Collection installation
-
+```
+ansible-galaxy collection install -U -r requirements.yml -p ./collections/
+```
 
 # Maintenance

@@ -17,10 +17,15 @@
       become: yes
       become_method: sudo
 
-    - name: install ansible itself
-      community.general.pipx:
-        name: ansible
-        state: latest
-        global: yes
-        install_deps: yes
-        pip_args: '--include-deps'
+    - name: Clone the control node git repo
+      ansible.builtin.git:
+        clone: yes
+        dest: "{{ repo_base_path }}"
+        repo: https://github.com/Sigurdur42/FedoraConfig.git
+
+    - name: Install or update galaxy community modules
+      community.general.ansible_galaxy_install:
+        dest: "{{ repo_base_path }}/ansibleControlNode/collections/ansible_collections"
+        requirements_file: "{{ repo_base_path }}/ansibleControlNode/requirements.yml"
+        type: collection
+

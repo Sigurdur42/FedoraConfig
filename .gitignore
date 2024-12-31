@@ -3,3 +3,6 @@
 
 # ansible temp data
 *-artifact-*.json
+
+# ansible galaxy collections
+ansible_collections/

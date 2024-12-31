@@ -4,7 +4,7 @@ packages_to_install:
     - git
     - remmina
     - digikam
-    - zsh
+    - zsh    
 
 dnf_backend: "dnf4"
 ...
