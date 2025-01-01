@@ -3,15 +3,15 @@
   hosts: control
 
   tasks:
-    - name: run apt-update
-      ansible.builtin.apt:
+    - name: run apt or dnf update
+      ansible.builtin.package:
         update_cache: yes
         upgrade: yes
       become: yes
       become_method: sudo
 
-    - name: install apt packages
-      ansible.builtin.apt:
+    - name: install packages
+      ansible.builtin.package:
         name: "{{ packages_to_install }}"
         state: latest
       become: yes

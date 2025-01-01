@@ -7,6 +7,7 @@ packages_to_install:
     - openssh-server
     - ansible
     - sshpass
+    - rclone
 
 repo_base_path: /home/ansible/ansible
 
