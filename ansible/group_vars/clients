@@ -4,7 +4,10 @@ packages_to_install:
     - git
     - remmina
     - digikam
-    - zsh    
+    - zsh
+    - rclone
+    - dotnet-sdk-8.0
 
-dnf_backend: "dnf4"
+mwagner_folders: 
+    - NextCloud    
 ...

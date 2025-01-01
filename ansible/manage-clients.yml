@@ -14,9 +14,37 @@
       become: yes
       become_method: sudo
 
+    - name: Ensure dnf5 will work on Fedora
+      become: yes
+      when: ansible_pkg_mgr is match("dnf.*")
+      dnf: 
+        name: python3-libdnf5
+        use_backend: "dnf4"
+        state: latest
+
     - name: Install software packages
-      become: yes      
+      become: yes
       ansible.builtin.package:
         name: "{{ packages_to_install }}"
-        state: latest        
-        update_cache: false      
+        state: latest
+        update_cache: false
+
+    - name: Create folders for mwagner
+      become: yes
+      become_user: mwagner
+      file:
+        name: '{{ item }}'
+        state: directory
+        recurse: yes
+      loop:
+        "{{ mwagner_folders }}"
+
+    - name: Check if pCloud already exists
+      stat: path=/home/mwagner/pCloud
+      register: pcloud_exists
+
+    - name: Download pCloud if not exists
+      when: pcloud_exists.stat.exists == False
+      get_url:
+        dest: /home/mwagner
+        url: https://p-lux1.pcloud.com/cBZOomEB3Zd6YO7b7ZZZtHRjXkZ2ZZrD0ZkZ9U8xVZz8ZTzZSYZpRZz4Z1pZnLZdQZpQZEQZGQZyzZU8ZYQZxqNX5Z36hAWHmWicS4se9DVPfhsk1VG23V/pcloud
