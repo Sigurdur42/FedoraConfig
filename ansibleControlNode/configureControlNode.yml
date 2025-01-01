@@ -3,10 +3,17 @@
   hosts: control
 
   tasks:
+    - name: Ensure dnf5 will work on Fedora
+      become: yes
+      when: ansible_pkg_mgr is match("dnf.*")
+      dnf:
+        name: python3-libdnf5
+        use_backend: "dnf4"
+        state: latest
+
     - name: run apt or dnf update
       ansible.builtin.package:
         update_cache: yes
-        upgrade: yes
       become: yes
       become_method: sudo
 
@@ -36,4 +43,3 @@
         dest: "{{ repo_base_path }}/ansibleControlNode/collections/ansible_collections"
         requirements_file: "{{ repo_base_path }}/ansibleControlNode/requirements.yml"
         type: collection
-
