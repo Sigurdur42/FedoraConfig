@@ -7,6 +7,14 @@ packages_to_install:
     - zsh
     - rclone
     - dotnet-sdk-8.0
+    - flameshot
+    - flatpak
+    - nextcloud-client
+
+flatpaks_to_install:
+    - md.obsidian.Obsidian
+    - com.todoist.Todoist
+
 
 mwagner_folders: 
     - NextCloud    
