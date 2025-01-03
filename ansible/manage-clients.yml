@@ -9,7 +9,7 @@
         generate_ssh_key: false
         state: present
         update_password: on_create
-        groups: "wheel"
+        groups: "{{ user_groups }}"
         password: $6$WtIUKXlU89ThPBvN$t5MIljRtyYoxAqoFixPPum3oOrA/zm.G0djMA10yKTPXAu8y.AlJAak3ppqV1W1M16Ppb6ziajQh2UQFtU5wV/
       become: yes
       become_method: sudo
@@ -22,7 +22,14 @@
         use_backend: "dnf4"
         state: latest
 
-    - name: Install software packages
+    - name: Install software packages (Common)
+      become: yes
+      ansible.builtin.package:
+        name: "{{ packages_to_install }}"
+        state: latest
+        update_cache: false
+
+    - name: Install software packages (Distro specific)
       become: yes
       ansible.builtin.package:
         name: "{{ packages_to_install }}"
@@ -48,16 +55,18 @@
     #     dest: /home/mwagner
     #     url: https://p-lux1.pcloud.com/cBZOomEB3Zd6YO7b7ZZZtHRjXkZ2ZZrD0ZkZ9U8xVZz8ZTzZSYZpRZz4Z1pZnLZdQZpQZEQZGQZyzZU8ZYQZxqNX5Z36hAWHmWicS4se9DVPfhsk1VG23V/pcloud
 
-    - name: Import Microsoft GPG Key
+    - name: Import Microsoft GPG Key (Fedora)
       become: yes
       become_method: sudo
+      when: ansible_pkg_mgr is match("dnf.*")
       ansible.builtin.rpm_key:
         key: https://packages.microsoft.com/keys/microsoft.asc
         state: present
 
-    - name: Add Visual Studio Code Repo
+    - name: Add Visual Studio Code Repo (Fedora)
       become: yes
       become_method: sudo
+      when: ansible_pkg_mgr is match("dnf.*")
       ansible.builtin.yum_repository:
         name: vscode
         description: Visual Studio Code
@@ -66,9 +75,10 @@
         gpgcheck: true
         enabled: true
 
-    - name: Install VS Code
+    - name: Install VS Code (Fedora)
       become: yes
       become_method: sudo
+      when: ansible_pkg_mgr is match("dnf.*")
       ansible.builtin.dnf:
         name: code
         state: present
