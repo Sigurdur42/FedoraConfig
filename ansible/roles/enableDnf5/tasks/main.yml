@@ -1,0 +1,11 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for enableDnf5
+
+- name: Ensure dnf5 will work on Fedora
+  become: yes
+  when: ansible_pkg_mgr is match("dnf.*")
+  dnf:
+    name: python3-libdnf5
+    use_backend: "dnf4"
+    state: latest
