@@ -17,4 +17,8 @@ flatpaks_to_install:
 
 mwagner_folders: 
     - NextCloud    
+
+target_user: mwagner
+target_password: $6$WtIUKXlU89ThPBvN$t5MIljRtyYoxAqoFixPPum3oOrA/zm.G0djMA10yKTPXAu8y.AlJAak3ppqV1W1M16Ppb6ziajQh2UQFtU5wV/
+
 ...

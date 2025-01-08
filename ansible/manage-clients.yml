@@ -2,20 +2,12 @@
 - name: Setup of my clients
   hosts: clients
   roles:
+    - roles/ensureTargetUserExists
+    - roles/nerdfonts
     - roles/vscode
 
-  tasks:
-    - name: Ensure my user exists
-      ansible.builtin.user:
-        name: mwagner
-        generate_ssh_key: false
-        state: present
-        update_password: on_create
-        groups: "{{ user_groups }}"
-        password: $6$WtIUKXlU89ThPBvN$t5MIljRtyYoxAqoFixPPum3oOrA/zm.G0djMA10yKTPXAu8y.AlJAak3ppqV1W1M16Ppb6ziajQh2UQFtU5wV/
-      become: yes
-      become_method: sudo
 
+  tasks:
     - name: Install software packages (Common)
       become: yes
       ansible.builtin.package:

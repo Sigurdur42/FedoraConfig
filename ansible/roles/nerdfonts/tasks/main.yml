@@ -1,0 +1,32 @@
+#SPDX-License-Identifier: MIT-0
+---
+# All fonts will be installed in users .fonts directory
+
+
+- name: Handle nerdfont installation
+  become: yes
+  become_user: "{{ target_user }}" 
+  block:
+  - name: Check if tagret nerdfont folder exists
+    stat:
+      path: "{{ nerdfont_font_dir }}"
+    register: nerdfont_font_dir_exists
+   
+  - name: Remove old version folders
+    file:
+      path: "{{ item }}"
+      state: absent
+    loop: "{{ nerdfonts_old_versions }}"
+   
+  - name: Ensure target font folder exists
+    file:
+      path: "{{ nerdfont_font_dir }}"
+      state: directory
+
+  - name: Extract fonts
+    ansible.builtin.unarchive:
+      src: "{{ item.url }}"
+      dest: "{{ nerdfont_font_dir }}"
+      remote_src: yes
+    loop: "{{ nerdfonts_fonts_to_install }}"
+    when: not nerdfont_font_dir_exists.stat.exists
