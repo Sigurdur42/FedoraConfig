@@ -1,0 +1,62 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Detect pkg mgr
+  set_fact:
+    pkg_mgr_short: "{{ ansible_pkg_mgr [:3] }}"
+
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Check for installed RPM
+  set_fact:
+    chezmoi_installed: "{{ ansible_facts.packages['chezmoi'] | length }} "
+
+- name: Check for installed RPM
+  ansible.builtin.debug:
+    msg: "{{ chezmoi_installed }} versions of foobar are installed!"
+
+- name: Download package
+  become: yes
+  become_user: "{{ target_user }}"
+  when: chezmoi_installed == 0
+  block:
+    - name: Create Downloads folder
+      file:
+        path: "/home/{{ target_user }}/Downloads"
+        state: directory
+
+    - name: Download RPM
+      get_url:
+        url: https://github.com/twpayne/chezmoi/releases/download/v2.57.0/chezmoi-2.57.0-x86_64.rpm
+        dest: "/home/{{ target_user }}/Downloads"
+      when:
+        - pkg_mgr_short == "dnf"
+
+    - name: Download deb
+      get_url:
+        url: https://github.com/twpayne/chezmoi/releases/download/v2.57.0/chezmoi_2.57.0_linux_amd64.deb
+        dest: "/home/{{ target_user }}/Downloads"
+      when:
+        - pkg_mgr_short == "apt"
+
+- name: Install packages
+  become: true
+  become_method: sudo
+  when:
+    - chezmoi_installed == 0
+  block:
+    - name: Install RPM
+      ansible.builtin.dnf:
+        name: "/home/{{ target_user }}/Downloads/chezmoi-2.57.0-x86_64.rpm"
+        state: present
+        disable_gpg_check: yes
+      when:
+        - pkg_mgr_short == "dnf"
+
+    - name: Install DEB
+      ansible.builtin.apt:
+        deb: "/home/{{ target_user }}/Downloads/chezmoi_2.57.0_linux_amd64.deb"
+        state: present
+      when:
+        - pkg_mgr_short == "apt"

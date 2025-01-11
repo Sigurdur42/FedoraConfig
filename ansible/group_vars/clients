@@ -5,6 +5,7 @@ packages_to_install:
     - remmina
     - digikam
     - zsh
+    - wget
     - rclone
     - dotnet-sdk-8.0
     - flameshot
