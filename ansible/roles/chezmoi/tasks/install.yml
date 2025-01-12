@@ -1,9 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
-- name: Gather the package facts
-  ansible.builtin.package_facts:
-    manager: auto
-
 - name: Check for installed RPM
   set_fact:
     chezmoi_installed: "{{ (ansible_facts.packages['chezmoi'] | length) == true }} "
@@ -40,7 +36,7 @@
   become: true
   become_method: sudo
   when:
-    - chezmoi_installed
+    - chezmoi_installed == False
   block:
     - name: Install RPM
       ansible.builtin.dnf:

@@ -2,36 +2,14 @@
 - name: Setup of my clients
   hosts: clients
   roles:
+    - roles/installPackages
     - roles/ensureTargetUserExists
     - roles/nerdfonts
     - roles/vscode
     - roles/ohMyZsh
-    ## - roles/chezmoi
+    - roles/chezmoi
 
   tasks:
-    - name: Install software packages (Common)
-      become: yes
-      ansible.builtin.package:
-        name: "{{ packages_to_install }}"
-        state: latest
-        update_cache: false
-
-    - name: Install software packages (Distro specific)
-      become: yes
-      ansible.builtin.package:
-        name: "{{ packages_to_install }}"
-        state: latest
-        update_cache: false
-
-    - name: Create folders for mwagner
-      become: yes
-      become_user: mwagner
-      file:
-        name: "{{ item }}"
-        state: directory
-        recurse: yes
-      loop: "{{ mwagner_folders }}"
-
     # - name: Check if pCloud already exists
     #   stat: path=/home/mwagner/pCloud
     #   register: pcloud_exists
@@ -41,22 +19,3 @@
     #   get_url:
     #     dest: /home/mwagner
     #     url: https://p-lux1.pcloud.com/cBZOomEB3Zd6YO7b7ZZZtHRjXkZ2ZZrD0ZkZ9U8xVZz8ZTzZSYZpRZz4Z1pZnLZdQZpQZEQZGQZyzZU8ZYQZxqNX5Z36hAWHmWicS4se9DVPfhsk1VG23V/pcloud
-
-    # - name: Install vscode
-    #   include_role:
-    #     name: vscode
-
-    - name: Add flathub remote
-      become: yes
-      become_method: sudo
-      community.general.flatpak_remote:
-        name: flathub
-        state: present
-        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-
-    - name: Install flatpaks
-      become: yes
-      become_method: sudo
-      community.general.flatpak:
-        name: "{{ flatpaks_to_install }}"
-        state: latest

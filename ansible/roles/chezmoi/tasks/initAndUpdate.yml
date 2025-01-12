@@ -9,7 +9,7 @@
     register: chezmoi_config_dir_exists
 
   - name: init chezmoi
-    when: not chezmoi_config_dir_exists.stat.exists
+    when: chezmoi_config_dir_exists.stat.exists == False
     command:
       argv:  
         - chezmoi
@@ -19,7 +19,8 @@
   - name: apply chezmoi
     command:
       argv:  
-        - chezmoi
+        - /usr/bin/chezmoi
         - apply 
+        - --force
 
 ...

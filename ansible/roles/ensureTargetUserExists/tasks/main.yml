@@ -2,6 +2,8 @@
 ---
 # tasks file for ensureTargetUserExists
 - name: Ensure my user exists
+  become: yes
+  become_method: sudo
   ansible.builtin.user:
     name: "{{ target_user }}"
     generate_ssh_key: false
@@ -10,5 +12,12 @@
     groups: "{{ user_groups }}"
     password: "{{ target_password }}"
     shell: /bin/zsh
+
+- name: Create folders for mwagner
   become: yes
-  become_method: sudo
+  become_user: "{{ target_user }}"
+  file:
+    name: "{{ item }}"
+    state: directory
+    recurse: yes
+  loop: "{{ target_user_folders }}"

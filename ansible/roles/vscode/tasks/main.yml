@@ -1,7 +1,16 @@
 #SPDX-License-Identifier: MIT-0
 ---
 
+- name: Check for installed package
+  set_fact:
+    vscode_installed: "{{ (ansible_facts.packages['code'] | length) == true }} "
+
+- name: Check for installed package
+  ansible.builtin.debug:
+    msg: "vscode is installed: {{ vscode_installed }}"
+
 - name: Install vscode
   ansible.builtin.include_tasks: "vscode-{{ pkg_mgr_short }}.yml"
+  when: vscode_installed == False
   
     

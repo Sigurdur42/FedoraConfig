@@ -1,6 +1,6 @@
 #SPDX-License-Identifier: MIT-0
 galaxy_info:
-  author: Michael Wagner
+  author: your name
   description: your role description
   company: your company (optional)
 
@@ -32,7 +32,5 @@ galaxy_info:
 
 dependencies: 
   - enableDnf5
-  - collectPackageData
-  
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,
   # if you add dependencies to this list.
