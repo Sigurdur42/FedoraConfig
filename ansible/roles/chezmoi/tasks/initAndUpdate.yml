@@ -1,0 +1,26 @@
+---
+- name: Init and Apply
+  become: yes
+  become_user: "{{ target_user }}"
+  block:
+  - name: Check if chezmoi is already initialized
+    stat:
+      path: "/home/{{ target_user }}/local/share/chezmoi"
+    register: chezmoi_config_dir_exists
+
+
+  - name: init chezmoi
+    when: not chezmoi_config_dir_exists.stat.exists
+    command:
+      argv:  
+        - chezmoi
+        - init 
+        - https://github.com/Sigurdur42/dotfiles.git
+
+  - name: apply chezmoi
+    command:
+      argv:  
+        - chezmoi
+        - apply 
+
+...

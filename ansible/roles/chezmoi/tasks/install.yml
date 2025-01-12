@@ -10,16 +10,16 @@
 
 - name: Check for installed RPM
   set_fact:
-    chezmoi_installed: "{{ ansible_facts.packages['chezmoi'] | length }} "
+    chezmoi_installed: "{{ (ansible_facts.packages['chezmoi'] | length) == true }} "
 
 - name: Check for installed RPM
   ansible.builtin.debug:
-    msg: "{{ chezmoi_installed }} versions of foobar are installed!"
+    msg: "chezmoi is installed: {{ chezmoi_installed }}"
 
 - name: Download package
   become: yes
   become_user: "{{ target_user }}"
-  when: chezmoi_installed == 0
+  when: chezmoi_installed
   block:
     - name: Create Downloads folder
       file:
@@ -44,7 +44,7 @@
   become: true
   become_method: sudo
   when:
-    - chezmoi_installed == 0
+    - chezmoi_installed
   block:
     - name: Install RPM
       ansible.builtin.dnf:

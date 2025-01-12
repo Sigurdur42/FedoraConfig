@@ -2,5 +2,8 @@
 ---
 # tasks file for chezmoi
 
-- name: Install vscode
+- name: Install chezmoi
   ansible.builtin.include_tasks: "install.yml"
+
+- name: apply chezmoi
+  ansible.builtin.include_tasks: "initAndUpdate.yml"
