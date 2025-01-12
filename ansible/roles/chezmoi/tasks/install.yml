@@ -1,9 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
-- name: Detect pkg mgr
-  set_fact:
-    pkg_mgr_short: "{{ ansible_pkg_mgr [:3] }}"
-
 - name: Gather the package facts
   ansible.builtin.package_facts:
     manager: auto

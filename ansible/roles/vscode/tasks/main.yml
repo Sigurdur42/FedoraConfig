@@ -1,16 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
-# tasks file for vscode
-
-
-
-- name: Detect pkg mgr
-  set_fact:
-    pkg_mgr_short: "{{ ansible_pkg_mgr [:3] }}"
-
-- name: Detected pkg mgr
-  debug:
-    msg: "Package mg: {{ pkg_mgr_short }}"
 
 - name: Install vscode
   ansible.builtin.include_tasks: "vscode-{{ pkg_mgr_short }}.yml"
