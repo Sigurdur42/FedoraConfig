@@ -5,9 +5,8 @@
   block:
   - name: Check if chezmoi is already initialized
     stat:
-      path: "/home/{{ target_user }}/local/share/chezmoi"
+      path: "/home/{{ target_user }}/.local/share/chezmoi"
     register: chezmoi_config_dir_exists
-
 
   - name: init chezmoi
     when: not chezmoi_config_dir_exists.stat.exists

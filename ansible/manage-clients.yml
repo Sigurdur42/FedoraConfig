@@ -5,7 +5,8 @@
     - roles/ensureTargetUserExists
     - roles/nerdfonts
     - roles/vscode
-    - roles/chezmoi
+    - roles/ohMyZsh
+    ## - roles/chezmoi
 
   tasks:
     - name: Install software packages (Common)

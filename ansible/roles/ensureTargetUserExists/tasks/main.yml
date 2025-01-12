@@ -9,5 +9,6 @@
     update_password: on_create
     groups: "{{ user_groups }}"
     password: "{{ target_password }}"
+    shell: /bin/zsh
   become: yes
   become_method: sudo

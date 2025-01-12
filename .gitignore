@@ -6,3 +6,6 @@
 
 # ansible galaxy collections
 ansible_collections/
+
+# external roles (galaxy or git)
+externalRoles/ansible-role-oh-my-zsh/

@@ -15,7 +15,7 @@
 - name: Download package
   become: yes
   become_user: "{{ target_user }}"
-  when: chezmoi_installed
+  when: chezmoi_installed == False
   block:
     - name: Create Downloads folder
       file:
