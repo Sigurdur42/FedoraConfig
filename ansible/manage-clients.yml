@@ -2,12 +2,12 @@
 - name: Setup of my clients
   hosts: clients
   roles:
-    - roles/installPackages
-    - roles/ensureTargetUserExists
-    - roles/nerdfonts
-    - roles/vscode
-    - roles/ohMyZsh
-    - roles/chezmoi
+    - installPackages
+    - ensureTargetUserExists
+    - nerdfonts
+    - vscode
+    - ohMyZsh
+    - chezmoi
 
   tasks:
     # - name: Check if pCloud already exists
