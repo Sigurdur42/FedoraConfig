@@ -1,3 +1,6 @@
 [submodule "ansible/roles/sharedAnsibleRoles"]
 	path = ansible/roles/sharedAnsibleRoles
 	url = https://github.com/Sigurdur42/sharedAnsibleRoles.git
+[submodule "ansibleControlNode/roles/sharedAnsibleRoles"]
+	path = ansibleControlNode/roles/sharedAnsibleRoles
+	url = https://github.com/Sigurdur42/sharedAnsibleRoles.git
