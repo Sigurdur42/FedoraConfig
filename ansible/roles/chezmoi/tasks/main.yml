@@ -1,9 +1,0 @@
-#SPDX-License-Identifier: MIT-0
----
-# tasks file for chezmoi
-
-- name: Install chezmoi
-  ansible.builtin.include_tasks: "install.yml"
-
-- name: apply chezmoi
-  ansible.builtin.include_tasks: "initAndUpdate.yml"
