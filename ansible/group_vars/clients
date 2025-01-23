@@ -10,10 +10,13 @@ packages_to_install:
     - dotnet-sdk-8.0
     - flameshot
     - flatpak
+    - wine
+    - winetricks
+    - q4wine
 
 flatpaks_to_install:
     - md.obsidian.Obsidian
-    - com.todoist.Todoist
+    - com.rtosta.zapzap
 
 
 target_user_folders: 
